@@ -139,8 +139,9 @@
 
     let position = { x: 0, y: 0 };
     let path = svg.dot(position);
+    let strokesize =0.5;
 
-    svg.makeLine({ parent: dom.svgLayer, d: path, id: "dot", color: "#ff0", stroke: 10, cap: "round", x: 0, y: 0 });
+    svg.makeLine({ parent: dom.svgLayer, d: path, id: "dot", color: "#ff0", stroke: strokesize, cap: "round", x: 0, y: 0 });
 
     let simplex = new SimplexNoise();
 
@@ -148,7 +149,7 @@
 
 
     let time = {};
-    let speed = 10000;
+    let speed = 15000;
     let amplification = 50;
 
     function loop(zeit) {
@@ -158,7 +159,7 @@
         time.before = time.now;
 
         let flow = ""
-     for (let i= 0; i<100; i++)  {
+     for (let i= 0; i<10000; i++)  {
             let x = simplex.noise2D(10*i, time.now/speed) * amplification;
             let y = simplex.noise2D(20*i, time.now/speed) * amplification;
             let bposition = { x: x, y: y };
