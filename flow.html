@@ -147,25 +147,28 @@
     //drawing
 
 
-
     let time = {};
-
-    let speed = 1000;
+    let speed = 10000;
     let amplification = 50;
 
-    function loop(sowieso) {
+    function loop(zeit) {
 
-        time.now = sowieso;
+        time.now = zeit;
         time.delta = time.now - time.before;
         time.before = time.now;
 
-        let x = simplex.noise2D(10, time.now/speed) * amplification;
-        let y = simplex.noise2D(20, time.now/speed) * amplification;
-        let position = { x: x, y: y };
-        let path = svg.dot(position);
+        let flow = ""
+     for (let i= 0; i<100; i++)  {
+            let x = simplex.noise2D(10*i, time.now/speed) * amplification;
+            let y = simplex.noise2D(20*i, time.now/speed) * amplification;
+            let bposition = { x: x, y: y };
+            let path= svg.dot(bposition);
+            flow +=path
+    
+    }   
+        //console.log (flow)
+        dom.dot.setAttributeNS(null, "d", flow);
 
-        dom.dot.setAttributeNS(null, "d", path);
-        
         requestAnimationFrame(loop);
 
     };
